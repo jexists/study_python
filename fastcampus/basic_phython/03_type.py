@@ -109,3 +109,18 @@ print(f) # [1, 3]
 # index: 리스트에 인덱스 값 반환
 g = [1, 2, 3]
 print(a.index(2)) # 1 (인덱스)
+
+# 튜플
+tuple_a = (1, 2, 3)
+print(tuple_a) # (1, 2, 3)
+print(type(tuple_a)) # <class 'tuple'>
+print(tuple_a[1]) # 2
+print(tuple_a[:2]) # (1, 2)
+# tuple_a[2] = 0 # ERROR 리스트 튜플 차이: 치환 (가능: 리스트 / 불가능: 튜플)
+# 바뀌면 안되는 값들 사용
+
+# 치환 제한 & 생성은 가능
+tuple_b = (1, 2, 3)
+tuple_c = (4, 5, 6)
+print(tuple_b + tuple_c) # (1, 2, 3, 4, 5, 6)
+print(tuple_b * 2) # (1, 2, 3, 1, 2, 3)
