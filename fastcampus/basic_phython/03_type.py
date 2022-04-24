@@ -130,32 +130,85 @@ print(tuple_b * 2)  # (1, 2, 3, 1, 2, 3)
 # key와 value로 구성
 
 dict_a = {'사과': 'apple', '오렌지': 'orange'}
-print(dict_a) # {'사과': 'apple', '오렌지': 'orange'}
-print(type(dict_a)) # <class 'dict'>
+print(dict_a)  # {'사과': 'apple', '오렌지': 'orange'}
+print(type(dict_a))  # <class 'dict'>
 
 # 하나의 key에 여러개의 value로도 구성이 가능
 dict_b = {'fruit': ['apple', 'orange'], 'vegetable': 'tomato'}
-print(dict_b) # {'fruit': ['apple', 'orange'], 'vegetable': 'tomato'}
+print(dict_b)  # {'fruit': ['apple', 'orange'], 'vegetable': 'tomato'}
 
-print(dict_b.keys()) # dict_keys(['fruit', 'vegetable'])
+print(dict_b.keys())  # dict_keys(['fruit', 'vegetable'])
 
 key = dict_b.keys()
 
-print(type(key)) # <class 'dict_keys'>
+print(type(key))  # <class 'dict_keys'>
 
 # print(key[0]) # ERROR (list type 변환 필요)
 
-key2 = list(key) 
-print(type(key2)) # <class 'list'>
-print(key2[0]) # fruit
+key2 = list(key)
+print(type(key2))  # <class 'list'>
+print(key2[0])  # fruit
 
 value = dict_b.values()
-print(value) # dict_values([['apple', 'orange'], 'tomato'])
+print(value)  # dict_values([['apple', 'orange'], 'tomato'])
 
 # print(value[0]) # ERROR
-value2 = list(value) 
-print(type(value2)) # <class 'list'>
-print(value2[0]) # ['apple', 'orange']
+value2 = list(value)
+print(type(value2))  # <class 'list'>
+print(value2[0])  # ['apple', 'orange']
 
-# # 요소 추가
-# dict_c = {'사과': 'apple', '오렌지': 'orange'}
+# 요소 추가
+dict_c = {'fruit': ['apple', 'orange'], 'vegetable': 'tomato'}
+dict_c['meat'] = 'beef'
+# {'fruit': ['apple', 'orange'], 'vegetable': 'tomato', 'meat': 'beef'}
+print(dict_c)
+
+# 요소 삭제
+dict_d = {'fruit': ['apple', 'orange'], 'vegetable': 'tomato'}
+del dict_d['vegetable']
+print(dict_d)  # {'fruit': ['apple', 'orange']}
+
+# SET 셋
+set_a = set([1, 2, 3])
+print(set_a)  # {1, 2, 3}
+print(type(set_a))  # <class 'set'>
+
+set_b = set({1, 2, 3})
+print(set_b)  # {1, 2, 3}
+print(type(set_b))  # <class 'set'>
+
+set_c = set((1, 2, 3))
+print(set_c)  # {1, 2, 3}
+print(type(set_c))  # <class 'set'>
+
+# 특징: 중복제거
+set_d = set([1, 1, 2, 3, 3, 4])
+print(set_d)  # {1, 2, 3, 4} (중복제거)
+
+# 특징: 순서없음 (index 없음)
+set_e = set([4, 4, 3, 2, 1, 'a', 'b', 'a'])
+print(set_e) # {1, 2, 3, 4, 'b', 'a'}
+# print(set_e[0]) # ERROR => 타입변환 후 찾기
+
+type_e = list(set_e)
+print(type_e) # [1, 2, 3, 4, 'b', 'a']
+print(type_e[0]) # 1
+
+
+# 집합
+set_f = set([1,2,3])
+set_g = set([3,4,5])
+
+# 합집합
+set_h = set_f.union(set_g)
+print(set_h) # {1, 2, 3, 4, 5}
+
+# 교집합
+set_i = set_f.intersection(set_g)
+print(set_i) # {3}
+
+# 차집합
+set_j = set_f.difference(set_g)
+print(set_j) # {1, 2}
+set_k = set_g.difference(set_f)
+print(set_k) # {4, 5}
