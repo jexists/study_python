@@ -204,3 +204,58 @@ while i < 10:
 # 9 x 7 = 63
 # 9 x 8 = 72
 # 9 x 9 = 81
+
+# 조건문 (if)
+# if 조건 1:
+#     조건 1이 참일 때 실행문
+# elif 조건 2:
+#     조건 2가 참일 때 실행문
+# else:
+#     실행문
+
+x = 6
+if x > 5:
+    print('TRUE')
+# TRUE
+
+x = 4
+if x > 5:
+    print('TRUE')
+else:
+    print('FALSE')
+# FALSE
+
+x = 5
+if x < 5:
+    print('5 미만')
+elif x == 5:
+    print('5')
+else:
+    print('5 초과')
+# 5
+
+x = 4
+if x < 5:
+    pass  # 패스
+elif x == 5:
+    print('5')
+else:
+    print('5 초과')
+
+A = [80, 95, 70, 55, 65]
+for i in A:
+    if i >= 90:
+        print(i, ' A')
+    elif i >= 80:
+        print(i, ' B')
+    elif i >= 70:
+        print(i, ' C')
+    elif i >= 60:
+        print(i, ' D')
+    else:
+        print(i, ' F')
+# 80  B
+# 95  A
+# 70  C
+# 55  F
+# 65  D
