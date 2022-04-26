@@ -39,7 +39,7 @@ for i in range(11):
 
 # for i in range(처음숫자, 마지막숫자, 증감숫자):
 for i in range(1, 10, 2):
-  print(i)
+    print(i)
 # 1
 # 3
 # 5
@@ -48,18 +48,32 @@ for i in range(1, 10, 2):
 
 # for i in range(처음숫자, 마지막숫자, 감소숫자):
 for i in range(9, 0, -2):
-  print(i)
+    print(i)
 # 9
 # 7
 # 5
 # 3
 # 1
 
+result = 0  # 초기값 지정
 for i in range(1, 11, 1):
-  result = result + i
-  print(result)
-# 9
-# 7
-# 5
+    # result = result + i
+    result += i
+print(result)  # 55
+
+for i in range(2, 10, 1):
+    print(i)
+# 2
 # 3
-# 1
+# 4
+# 5
+# 6
+# 7
+# 8
+# 9
+
+# 구구단
+for i in range(2, 10, 1):
+    for j in range(1, 10, 1):
+        # print(i * j)
+        print('{} x {} = {}'.format(i, j, i*j))
