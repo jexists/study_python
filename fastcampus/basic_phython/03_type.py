@@ -18,6 +18,8 @@ print(type(float_d))  # <class 'float'>
 print(type(int_a + float_d))  # <class 'float'>
 
 
+# 문자형
+# string ⇒ ""/ '' (섞이면안됨)
 str_a = 'hello world'
 str_b = "hello world"
 print(type(str_a))  # <class 'str'>

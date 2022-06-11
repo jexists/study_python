@@ -17,3 +17,9 @@ print("Hello World")
 print("주석???")
 '''
 print("주석???")
+
+## 버전
+# `python3 -V`
+
+## 실행
+# `python3 파일이름`
