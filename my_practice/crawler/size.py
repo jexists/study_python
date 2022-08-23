@@ -77,9 +77,12 @@ while l:
     body = main.find_all("tr")
     for x in body:
         temp_dict={}
-        print(x.find("div", class_="inner_number").text)
-        # print(x.find("div", class_="inner_list").find("a", class_="article").text)
+        if x.find("div", class_="inner_number") is not None:
+            print(x.find("div", class_="inner_number").text.strip())
+            print(x.select("div.inner_list > a.article"))
+            print("======================")
+        # print(x.select("div.inner_list > a.article").text.strip())
         # https://riverkangg.github.io/%ED%81%AC%EB%A1%A4%EB%A7%81/crawling-2naverCafe/
     l = False
 
-chrome.close()
+chrome.quit()

@@ -31,14 +31,21 @@ def finds_visible(css):
 find_visible("input#query").send_keys("레사모\n")
 
 e = find_visible("li[data-cr-rank='3']")
-# 일부 스크린샷
 
-chrome.save_screenshot("./test9.png")
+body = find_visible("body")
+body.screenshot("./test10.png")
+
+chrome.save_screenshot("./test11.png")
 chrome.set_window_size(1000,10000)
-chrome.save_screenshot("./test10.png")
+chrome.save_screenshot("./test12.png")
 
 # window 사이즈를 넉넉하게 잡아줘야함
 body = find_visible("body")
-body.screenshot("./test11.png")
+body.screenshot("./test13.png")
+
+chrome.execute_script("""
+    document.querySelector("li[data-cr-rank='3']").setAttribute('style','border: 10px solid red')
+    """)
+body.screenshot("./test14.png")
  
 chrome.close()
