@@ -40,6 +40,8 @@ time.sleep(3)
 
 pyperclip.copy(os.environ.get("ID"))
 input_id.send_keys(Keys.COMMAND, 'v')
+
+time.sleep(3)
 pyperclip.copy(os.environ.get("PASSWORD"))
 input_pw.send_keys(Keys.COMMAND, 'v')
 input_pw.send_keys('\n')
@@ -66,16 +68,17 @@ while l:
     time.sleep( random.randint(0,5) )
     
     ### 현재 페이지의 html 불러오기
+
     r = chrome.page_source
     page_html = BeautifulSoup(r, "html.parser")
 
-    content = page_html.find("div", class_="article-board").find('tbody')
-    body = content.find_all("tr")
-    ### 게시글 정보 저장하기
-    print(len(body))
+    content = page_html.find_all("div", class_="article-board")
+    main = content[1].find("tbody")
+    body = main.find_all("tr")
     for x in body:
         temp_dict={}
-        print(x.find("div", class_="inner_number"))
+        print(x.find("div", class_="inner_number").text)
+        # print(x.find("div", class_="inner_list").find("a", class_="article").text)
         # https://riverkangg.github.io/%ED%81%AC%EB%A1%A4%EB%A7%81/crawling-2naverCafe/
     l = False
 
