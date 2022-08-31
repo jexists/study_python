@@ -79,7 +79,7 @@ while l:
         temp_dict={}
         if x.find("div", class_="inner_number") is not None:
             print(x.find("div", class_="inner_number").text.strip())
-            print(x.select("div.inner_list > a.article"))
+            print(x.select("div.inner_list > a.article")[0].strip())
             print("======================")
         # print(x.select("div.inner_list > a.article").text.strip())
         # https://riverkangg.github.io/%ED%81%AC%EB%A1%A4%EB%A7%81/crawling-2naverCafe/
