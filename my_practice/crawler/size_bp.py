@@ -82,9 +82,9 @@ for idx, val in enumerate(lists):
     print(idx)
     if idx >= 1:
         chrome.switch_to.frame("cafe_main")
-        print(lists[idx])
+        board = finds_visible(".article-board")
+        lists = board[1].find_elements(By.CSS_SELECTOR, 'tbody .td_article')
         time.sleep(5)
-    print(lists[idx].get_attribute('innerHTML'))
     lists[idx].find_element(By.CSS_SELECTOR, '.board-list .article').click()
     time.sleep(5)
     chrome.switch_to.default_content()
