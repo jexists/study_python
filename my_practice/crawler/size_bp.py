@@ -15,6 +15,9 @@ import random
 
 from dotenv import load_dotenv
 import os
+
+import csv
+
 load_dotenv()
 
 # 크롬 옵션 설정
@@ -90,6 +93,11 @@ for idx, val in enumerate(lists):
     chrome.switch_to.default_content()
     time.sleep(3)
     print(chrome.title)
+    chrome.switch_to.frame("cafe_main")
+    chrome.implicitly_wait(10)
+
+    contents = chrome.find_elements(By.CSS_SELECTOR, '.se-main-container')
+
     chrome.implicitly_wait(10)
     chrome.back()
     time.sleep(3)
