@@ -13,6 +13,7 @@ import pyperclip # 임시 저장소
 
 from bs4 import BeautifulSoup
 import random
+import base64
 
 from dotenv import load_dotenv
 import os
@@ -75,6 +76,7 @@ find_visible('.gnb_my_namebox')
 
 chrome.implicitly_wait(0.5)
 
+# 게시판 번호
 find_presence("#menuLink277").click()
 chrome.implicitly_wait(0.5)
 chrome.switch_to.frame("cafe_main")
@@ -85,8 +87,9 @@ board = finds_visible(".article-board")
 lists = board[1].find_elements(By.CSS_SELECTOR, 'tbody .td_article')
 print(len(lists))
 
-re4mo = [];
-for idx, val in enumerate(lists):
+re4mo = []
+for idx, val in enumerate([1,2,3]):
+# for idx, val in enumerate(lists):
     chrome.implicitly_wait(10)
     if idx >= 1:
         chrome.switch_to.frame("cafe_main")
@@ -107,9 +110,18 @@ for idx, val in enumerate(lists):
 
     chrome.set_window_size(1000,10000)
     contents = find_visible('.se-main-container')
-    save_path = str(idx) + "_" + link
+    if idx == 0:
+      os.mkdir("./re4mo")
+    save_path = "./re4mo/" + str(idx) + "_" + link
     os.mkdir(save_path)
-    contents.screenshot(save_path + "/" + str(idx)+".png")
+    screenshot = save_path + "/" + str(idx)+".png"
+    contents.screenshot(screenshot)
+
+    with open(screenshot, "rb") as image:
+      encoded_string = base64.b64encode(image.read())
+      # encoded_string.decode('utf-8')
+      image = encoded_string.decode('utf-8')
+      image.show
 
     content = contents.get_attribute('innerText').strip()
     date = chrome.find_element(By.CSS_SELECTOR, '.article_info .date').get_attribute('innerText')
@@ -134,6 +146,7 @@ for idx, val in enumerate(lists):
     temp.append(date)
     temp.append(nickname)
     temp.append(content)
+    temp.append(image)
     re4mo.append(temp) #list 안에 list 가 들어가는 형태
 
 time.sleep(3)
