@@ -24,7 +24,7 @@ load_dotenv()
 
 # 크롬 옵션 설정
 options = webdriver.ChromeOptions()
-options.headless = True
+# options.headless = True
 # options.add_argument('window-size=1000,1000')
 options.add_argument('no-sandbox')
 
@@ -80,6 +80,15 @@ chrome.implicitly_wait(0.5)
 chrome.switch_to.frame("cafe_main")
 
 time.sleep( random.randint(0,5) )
+
+# 50개 목록 불러오기
+find_presence(".select_box").click()
+time.sleep( random.randint(0,5) )
+find_presence(".select_list li:nth-child(7) a").click()
+time.sleep( random.randint(0,5) )
+#
+find_presence(".prev-next a:nth-child(4)").click()
+time.sleep( random.randint(0,5) )
     
 board = finds_visible(".article-board")
 lists = board[1].find_elements(By.CSS_SELECTOR, 'tbody .td_article')
@@ -105,22 +114,22 @@ for idx, val in enumerate(lists):
     chrome.implicitly_wait(10)
     time.sleep(5)
 
-    chrome.set_window_size(1000,10000)
-    contents = find_visible('.se-main-container')
-    save_path = str(idx) + "_" + link
-    os.mkdir(save_path)
-    contents.screenshot(save_path + "/" + str(idx)+".png")
+    # chrome.set_window_size(1000,10000)
+    # contents = find_visible('.se-main-container')
+    # save_path = str(idx) + "_" + link
+    # os.mkdir(save_path)
+    # contents.screenshot(save_path + "/" + str(idx)+".png")
 
-    content = contents.get_attribute('innerText').strip()
-    date = chrome.find_element(By.CSS_SELECTOR, '.article_info .date').get_attribute('innerText')
-    nickname = chrome.find_element(By.CSS_SELECTOR, '.nick_box .nickname').get_attribute('innerText')
+    # content = contents.get_attribute('innerText').strip()
+    # date = chrome.find_element(By.CSS_SELECTOR, '.article_info .date').get_attribute('innerText')
+    # nickname = chrome.find_element(By.CSS_SELECTOR, '.nick_box .nickname').get_attribute('innerText')
 
-    imgs = contents.find_elements(By.CSS_SELECTOR, 'img')
-    for img in imgs:
-        src = img.get_attribute('src')
-        t = urlopen(src).read()
-        file = open(os.path.join(save_path, link + id_generator() + ".jpg"), "wb")
-        file.write(t)
+    # imgs = contents.find_elements(By.CSS_SELECTOR, 'img')
+    # for img in imgs:
+    #     src = img.get_attribute('src')
+    #     t = urlopen(src).read()
+    #     file = open(os.path.join(save_path, link + id_generator() + ".jpg"), "wb")
+    #     file.write(t)
 
     chrome.implicitly_wait(10)
     chrome.back()
@@ -128,21 +137,21 @@ for idx, val in enumerate(lists):
     chrome.switch_to.default_content()
     chrome.implicitly_wait(10)
 
-    temp = []
-    temp.append(link)
-    temp.append(title)
-    temp.append(date)
-    temp.append(nickname)
-    temp.append(content)
-    re4mo.append(temp) #list 안에 list 가 들어가는 형태
+    # temp = []
+    # temp.append(link)
+    # temp.append(title)
+    # temp.append(date)
+    # temp.append(nickname)
+    # temp.append(content)
+    # re4mo.append(temp) #list 안에 list 가 들어가는 형태
 
 time.sleep(3)
 
 chrome.quit()
 
-f = open(f're4mo_size.csv','w',encoding='utf-8',newline='') #파일오픈
-csvWriter = csv.writer(f)#열어둔 파일
-for i in re4mo:
-    csvWriter.writerow(i) 
+# f = open(f're4mo_size.csv','w',encoding='utf-8',newline='') #파일오픈
+# csvWriter = csv.writer(f)#열어둔 파일
+# for i in re4mo:
+#     csvWriter.writerow(i) 
 
-f.close()
+# f.close()
