@@ -19,6 +19,10 @@ from dotenv import load_dotenv
 import os
 import string
 
+from openpyxl import Workbook
+from openpyxl.drawing.image import Image
+# pip install openpyxl
+
 import csv
 
 load_dotenv()
@@ -121,7 +125,6 @@ for idx, val in enumerate([1,2,3]):
       encoded_string = base64.b64encode(image.read())
       # encoded_string.decode('utf-8')
       image = encoded_string.decode('utf-8')
-      image.show
 
     content = contents.get_attribute('innerText').strip()
     date = chrome.find_element(By.CSS_SELECTOR, '.article_info .date').get_attribute('innerText')
@@ -140,22 +143,30 @@ for idx, val in enumerate([1,2,3]):
     chrome.switch_to.default_content()
     chrome.implicitly_wait(10)
 
-    temp = []
-    temp.append(link)
-    temp.append(title)
-    temp.append(date)
-    temp.append(nickname)
-    temp.append(content)
-    temp.append(image)
-    re4mo.append(temp) #list 안에 list 가 들어가는 형태
+    # 엑셀 쓰기위한 준빈
+    wb = Workbook()
+    sheet = wb.active
+    img = Image(screenshot) 
+
+    allList = []
+    for row in sheet.iter_rows(min_row=1, max_row=10, min_col=2, max_col=5):
+        a = []
+        for cell in row:
+            a.append(cell.value)
+        allList.append(a)
+    sheet.add_image(img, 'A' + str(idx + 1))
+    sheet.column_dimensions['A'].width = 30
+    # sheet.row_dimensions[1].height = 174
+    sheet.append(link)
+    sheet.append(title)
+    sheet.append(date)
+    sheet.append(nickname)
+    sheet.append(content)
+    sheet.append(image)
 
 time.sleep(3)
 
 chrome.quit()
 
-f = open(f're4mo_size.csv','w',encoding='utf-8',newline='') #파일오픈
-csvWriter = csv.writer(f)#열어둔 파일
-for i in re4mo:
-    csvWriter.writerow(i) 
 
-f.close()
+sheet.save('test.xlsx')
