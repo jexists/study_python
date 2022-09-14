@@ -86,8 +86,8 @@ time.sleep( random.randint(0,5) )
 find_presence(".select_list li:nth-child(7) a").click()
 time.sleep( random.randint(0,5) )
 #
-find_presence(".prev-next a:nth-child(4)").click()
-time.sleep( random.randint(0,5) )
+# find_presence(".prev-next a:nth-child(0)").click()
+# time.sleep( random.randint(0,5) )
     
 board = finds_visible(".article-board")
 lists = board[1].find_elements(By.CSS_SELECTOR, 'tbody .td_article')
@@ -102,7 +102,7 @@ for idx, val in enumerate([1,2,3]):
         board = finds_visible(".article-board")
         lists = board[1].find_elements(By.CSS_SELECTOR, 'tbody .td_article')
         chrome.implicitly_wait(10)
-    title = lists[idx].find_element(By.CSS_SELECTOR, '.board-list .article').get_attribute('innerText')
+    title = lists[idx].find_element(By.CSS_SELECTOR, '.board-list .article').get_attribute('innerText').replace(",","..")
     link = lists[idx].find_element(By.CSS_SELECTOR, '.board-number .inner_number').get_attribute('innerText')
     print(idx, title, link)
 
