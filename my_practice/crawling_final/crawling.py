@@ -74,6 +74,8 @@ find_visible('.gnb_my_namebox')
 
 chrome.implicitly_wait(0.5)
 
+# menuLink330 : 품번공유
+# menuLink277 : 사이즈공유
 find_presence("#menuLink277").click()
 chrome.implicitly_wait(0.5)
 chrome.switch_to.frame("cafe_main")
