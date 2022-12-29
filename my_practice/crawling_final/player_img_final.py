@@ -16,14 +16,14 @@ import csv
 
 # 크롬 옵션 설정
 options = webdriver.ChromeOptions()
-# options.headless = True
-options.add_argument('window-size=1000,1000')
+options.headless = True
+# options.add_argument('window-size=1000,1000')
 options.add_argument('no-sandbox')
 
 chrome = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
 # 파일 이름 (링크) ################
-chrome.get('https://www.fifa.com/fifaplus/ko/tournaments/mens/worldcup/qatar2022/teams/netherlands/squad')
+chrome.get('https://www.fifa.com/fifaplus/ko/tournaments/mens/worldcup/qatar2022/teams/uruguay/squad')
 wait = WebDriverWait(chrome, 10)
 
 
@@ -52,6 +52,7 @@ for idx, val in enumerate(board):
     chrome.implicitly_wait(10)
     title = board[idx].find_element(By.CSS_SELECTOR, '.player-badge-card_playerFirstname__1HlN6').get_attribute('innerText')
     position = board[idx].find_element(By.CSS_SELECTOR, '.player-badge-card_playerPosition__wjnoI').get_attribute('innerText')
+    print(title)
 
     # csv 저장하는 위치
     save_path = "./"
@@ -64,14 +65,14 @@ for idx, val in enumerate(board):
         temp = []
         temp.append(title)
         temp.append(position)
-        temp.append("\"photo_img\" :"+ src + ',')
+        temp.append("\"photo_img\" : \""+ src.lstrip('url("').rstrip('")') + '\",')
         re4mo.append(temp) #list 안에 list 가 들어가는 형태
 
 chrome.quit()
 
 
 # 파일 이름 (나라) ################
-f = open(f'netherlands.csv','w',encoding='utf-8-sig',newline='') #파일오픈
+f = open(f'uruguay.csv','w',encoding='utf-8-sig',newline='') #파일오픈
 csvWriter = csv.writer(f)#열어둔 파일
 csv_title = ["타이틀", "포지션", "링크"]
 csvWriter.writerow(csv_title)
