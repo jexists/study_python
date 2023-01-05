@@ -57,4 +57,38 @@ def create_docments():
     docs.append(doc)
   person_collection.insert_many(docs)
 
-create_docments()
+# create_docments()
+
+printer = pprint.PrettyPrinter()
+
+def find_all_people():
+  people = person_collection.find()
+
+  for person in people:
+    printer.pprint(person)
+
+# find_all_people()
+def find_joy():
+  tim = person_collection.find_one({"first_name":"joy"})
+  printer.pprint(tim)
+# find_joy()
+
+def find_joy_by_name():
+  tim = person_collection.find_one({"first_name":"joy", "last_name": "J"})
+  printer.pprint(tim)
+
+def count_all_people():
+  # count = person_collection.find().count()
+  # find().count() 변경됨 -> count_documents()
+  count = person_collection.count_documents(filter={})
+  print("num of people :", count)
+# count_all_people()
+
+# 63b43ad36a7d3b218b0a3961
+def get_person_by_id(person_id):
+  from bson.objectid import ObjectId
+  _id = ObjectId(person_id)
+  person = person_collection.find_one({"_id":_id})
+  printer.pprint(person)
+
+# get_person_by_id("63b43ad36a7d3b218b0a3961")
