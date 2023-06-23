@@ -1,4 +1,3 @@
-
 from urllib.request import urlopen
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
