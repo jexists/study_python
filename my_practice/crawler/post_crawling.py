@@ -55,8 +55,6 @@ def finds_visible(css):
     return chrome.find_elements(By.CSS_SELECTOR, css)
 
 
-# find_presence(".gnb_btn_login").click()
-
 time.sleep(3)
 
 input_id = find_visible('input#id')
@@ -85,33 +83,37 @@ chrome.implicitly_wait(10)
 time.sleep(5)
 
 chrome.set_window_size(1000,10000)
-contents = find_visible('.se-main-container')
-save_path = "./"
-os.mkdir(save_path)
-screenshot = save_path + "/" + str(1)+".png"
-contents.screenshot(screenshot)
 
-with open(screenshot, "rb") as image:
-  encoded_string = base64.b64encode(image.read())
-  # encoded_string.decode('utf-8')
-  image = encoded_string.decode('utf-8')
+try:
+  contents = find_visible('.se-main-container')
+except:
+  contents = find_visible('.ContentRenderer')
 
-  content = contents.get_attribute('innerText').strip()
-  date = chrome.find_element(By.CSS_SELECTOR, '.article_info .date').get_attribute('innerText')
-  nickname = chrome.find_element(By.CSS_SELECTOR, '.nick_box .nickname').get_attribute('innerText')
+print(contents)
+# save_path = "./re4mo"
+# screenshot = save_path + "/" + str(1)+".png"
+contents.screenshot("./test.png")
 
-  imgs = contents.find_elements(By.CSS_SELECTOR, 'img')
-  for img in imgs:
-      src = img.get_attribute('src')
-      t = urlopen(src).read()
-      file = open(os.path.join(save_path, id_generator() + ".jpg"), "wb")
-      file.write(t)
+# with open(screenshot, "rb") as image:
+#   encoded_string = base64.b64encode(image.read())
+#   image = encoded_string.decode('utf-8')
 
-  chrome.implicitly_wait(10)
-  chrome.back()
-  time.sleep(3)
-  chrome.switch_to.default_content()
-  chrome.implicitly_wait(10)
+  # content = contents.get_attribute('innerText').strip()
+  # date = chrome.find_element(By.CSS_SELECTOR, '.article_info .date').get_attribute('innerText')
+  # nickname = chrome.find_element(By.CSS_SELECTOR, '.nick_box .nickname').get_attribute('innerText')
+
+  # imgs = contents.find_elements(By.CSS_SELECTOR, 'img')
+  # for img in imgs:
+  #     src = img.get_attribute('src')
+  #     t = urlopen(src).read()
+  #     file = open(os.path.join(save_path, id_generator() + ".jpg"), "wb")
+  #     file.write(t)
+
+  # chrome.implicitly_wait(10)
+  # chrome.back()
+  # time.sleep(3)
+  # chrome.switch_to.default_content()
+  # chrome.implicitly_wait(10)
 
   # # 엑셀 쓰기위한 준빈
   # wb = Workbook()
